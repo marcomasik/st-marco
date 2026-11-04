@@ -1,0 +1,24 @@
+body {
+  .icon {
+    flex: none;
+    width: 24px;
+    height: 24px;
+
+    &.is-skip {
+      width: 30px;
+      height: 30px;
+    }
+
+    &.is-arrow {
+      width: 26px;
+      height: 20px;
+    }
+
+    &__label {
+      font-family: var(--font-hand);
+      font-size: 8.5px;
+      fill: var(--ink);
+      stroke: none;
+    }
+  }
+}

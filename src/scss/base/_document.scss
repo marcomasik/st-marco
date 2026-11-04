@@ -1,0 +1,29 @@
+html {
+  color-scheme: light;
+  // Shows while the photo loads and in the iOS overscroll area.
+  background: var(--sky-light);
+}
+
+body {
+  min-height: 100svh;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--sky-light);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-hand);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+:focus-visible {
+  outline: 3px solid var(--sky-text);
+  outline-offset: 3px;
+}

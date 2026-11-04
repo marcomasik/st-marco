@@ -1,0 +1,39 @@
+@use '../base/breakpoints' as bp;
+
+body {
+  // Phones: peeks in from the top left corner over the header photo and scrolls away
+  // with it, so it never sits over the list.
+  .palm-frond {
+    position: absolute;
+    top: -30px;
+    left: -44px;
+    z-index: 3;
+    width: 112px;
+    rotate: 34deg;
+    pointer-events: none;
+
+    &__art {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(3px 6px 3px rgb(20 60 60 / 0.28));
+    }
+  }
+
+  // Tablet and desktop: fixed at the bottom left, behind the panel, reaching in from the
+  // edge like the palms in the photo.
+  @media (min-width: bp.$tablet) and (min-height: bp.$tall) {
+    .palm-frond {
+      position: fixed;
+      top: auto;
+      bottom: -3vh;
+      left: -2vw;
+      z-index: 1;
+      width: clamp(250px, 30vw, 500px);
+      rotate: -6deg;
+
+      &__art {
+        filter: drop-shadow(6px 12px 8px rgb(20 60 60 / 0.3));
+      }
+    }
+  }
+}

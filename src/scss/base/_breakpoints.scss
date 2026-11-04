@@ -1,0 +1,7 @@
+// Phones: below $tablet wide or below $tall high (landscape phones too).
+// From $tablet x $tall the panel hangs below the island; from $boombox x $tall the player
+// is the boombox standing on the sand instead of the bottom bar.
+$tablet: 600px;
+$boombox: 760px;
+$wide: 1280px;
+$tall: 600px;

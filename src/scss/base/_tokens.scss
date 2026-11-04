@@ -1,0 +1,41 @@
+// Palette sampled from public/img/island.jpg, so the drawings and the photo share colours.
+// Text pairs are checked for WCAG AA by src/designRules.test.ts (keep the hex format).
+:root {
+  // Photo colours
+  --sea: #08b2ba; // turquoise water (photo: #05B4BB)
+  --sea-light: #8fdde0; // shallow water
+  --sky: #0a77d8; // deep sky at the top (photo: #0077DE)
+  --sky-light: #84b9e2; // hazy sky at the horizon (photo: #82B8E0)
+  --sand: #f5d9c5; // sandbar (photo: #F4D5C3)
+  --palm: #57792f; // palm fronds (photo: #727F47 sunlit, #4A6549 shade)
+  --palm-light: #9db04c; // sunlit frond tips
+  --palm-dark: #3d5a24;
+  --cloud: #f5f8ff; // brightest cloud white
+
+  // Marker colours (from the reference)
+  --ink: #2b2b2b; // soft black outlines and text
+  --marker-orange: #f29a2e;
+  --marker-yellow: #f6c945;
+
+  // Panel paper: warm off-white, never pure white
+  --paper: #fffaf0;
+  --paper-shade: #f6eddc;
+
+  // Text-safe variants (AA 4.5:1 on --paper)
+  --ink-soft: #5c5751; // dates, durations, secondary text
+  --sky-text: #0062c4; // links, timestamps
+  --error-text: #a3261b;
+
+  // Type
+  --font-hand: 'Gochi Hand', 'Comic Sans MS', 'Chalkboard SE', cursive;
+  --font-body: 'Nunito Variable', 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  // Sizes
+  --tap: 44px;
+  --gutter: 14px;
+  --marker: 3px; // default marker stroke
+
+  // Layout (see layout/_scene.scss)
+  --panel-max: 720px;
+  --boombox-width: clamp(284px, 17vw, 340px);
+}

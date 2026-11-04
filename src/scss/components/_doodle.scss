@@ -1,0 +1,122 @@
+// Shared colours for every hand-drawn SVG (doodles, frames, wordmark, illustrations inline).
+// SVG attributes cannot read CSS custom properties, so colours are set through classes.
+body {
+  .doodle {
+    display: block;
+    max-width: none;
+    overflow: visible;
+    pointer-events: none;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    &__ink {
+      fill: none;
+      stroke: var(--ink);
+    }
+
+    &__ink-fill {
+      fill: var(--ink);
+    }
+
+    &__orange {
+      fill: none;
+      stroke: var(--marker-orange);
+    }
+
+    &__yellow {
+      fill: none;
+      stroke: var(--marker-yellow);
+    }
+
+    &__cloud {
+      fill: none;
+      stroke: var(--cloud);
+    }
+
+    &__sea {
+      fill: none;
+      stroke: var(--sea-light);
+    }
+
+    &__fill-yellow {
+      fill: var(--marker-yellow);
+    }
+
+    &__fill-orange {
+      fill: var(--marker-orange);
+    }
+
+    &__fill-cloud {
+      fill: var(--cloud);
+    }
+
+    &__fill-sea {
+      fill: var(--sea);
+    }
+
+    &__fill-paper {
+      fill: var(--paper);
+    }
+  }
+
+  // Rough.js borders (RoughFrame.tsx). Variants only switch colours.
+  .rough-frame {
+    --frame-fill: var(--paper);
+    --frame-line: var(--marker-orange);
+    --frame-second: var(--sea);
+
+    position: absolute;
+    z-index: -1;
+    // Wider than its parent on purpose (room for overshooting strokes): never scale it.
+    max-width: none;
+    overflow: visible;
+    pointer-events: none;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    &__fill {
+      fill: var(--frame-fill);
+    }
+
+    &__line {
+      stroke: var(--frame-line);
+    }
+
+    &__second {
+      stroke: var(--frame-second);
+    }
+
+    &.is-card {
+      --frame-fill: var(--cloud);
+      --frame-line: var(--ink);
+      --frame-second: var(--sky-light);
+    }
+
+    &.is-current {
+      --frame-fill: var(--cloud);
+      --frame-second: var(--sea);
+    }
+
+    &.is-button {
+      --frame-fill: var(--marker-yellow);
+      --frame-line: var(--ink);
+      --frame-second: var(--marker-orange);
+    }
+
+    &.is-key {
+      --frame-fill: var(--cloud);
+      --frame-line: var(--ink);
+    }
+
+    &.is-screen {
+      --frame-fill: var(--sea-light);
+      --frame-line: var(--ink);
+    }
+
+    &.is-highlight {
+      --frame-line: var(--marker-orange);
+    }
+  }
+}

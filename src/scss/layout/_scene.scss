@@ -1,0 +1,45 @@
+@use '../base/breakpoints' as bp;
+
+// The page: fixed photo behind, the hanging panel in the flow, the player in front.
+// Layout numbers live here as custom properties so the components only read them.
+body {
+  .scene {
+    // Phones: short strings, panel almost full width, bottom player bar.
+    --string-length: 30px;
+    --panel-w: calc(100% - 2 * var(--gutter));
+    --panel-left: var(--gutter);
+    --player-space: calc(158px + env(safe-area-inset-bottom));
+
+    position: relative;
+    min-height: 100vh;
+    min-height: 100lvh;
+    padding-bottom: var(--player-space);
+    overflow-x: clip;
+  }
+
+  @media (min-width: bp.$tablet) and (min-height: bp.$tall) {
+    .scene {
+      // The panel hangs just below the island. The photo is cover-scaled to this height, and
+      // the island's beach sits at y 715 of 1279, i.e. 5.9% below the photo's middle.
+      --photo-h: max(100vh, calc(100vw * 1279 / 1920));
+      --string-length: min(calc(50vh + 0.059 * var(--photo-h)), 70vh);
+      --panel-w: min(var(--panel-max), calc(100% - 64px));
+      --panel-left: calc((100% - var(--panel-w)) / 2);
+      --player-space: calc(150px + env(safe-area-inset-bottom));
+    }
+  }
+
+  @media (min-width: bp.$boombox) and (min-height: bp.$tall) {
+    .scene {
+      // Room on the right for the boombox. The panel stays centred while it fits next to
+      // it and slides left when it does not, so the two never overlap.
+      --boombox-space: calc(var(--boombox-width) + 44px);
+      --panel-w: min(var(--panel-max), calc(100% - var(--boombox-space) - 36px));
+      --panel-left: min(
+        calc((100% - var(--panel-w)) / 2),
+        calc(100% - var(--boombox-space) - var(--panel-w))
+      );
+      --player-space: 48px;
+    }
+  }
+}

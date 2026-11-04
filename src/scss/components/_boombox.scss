@@ -1,0 +1,199 @@
+@use '../base/breakpoints' as bp;
+
+body {
+  // Phones: a drawn player bar fixed to the bottom, above the home indicator.
+  .boombox {
+    position: fixed;
+    right: 8px;
+    bottom: calc(6px + env(safe-area-inset-bottom));
+    left: 8px;
+    z-index: 10;
+    isolation: isolate;
+    display: grid;
+    gap: 0;
+    padding: 4px 10px 6px;
+
+    &__art {
+      display: none;
+    }
+
+    &__screen {
+      position: relative;
+      isolation: isolate;
+      display: grid;
+      align-content: center;
+      padding: 0 10px;
+    }
+
+    &__now {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      margin: 0;
+      font-family: var(--font-hand);
+      font-size: 1.15rem;
+    }
+
+    // A full 44px row, so the title link is a comfortable tap target.
+    &__title {
+      display: block;
+      min-width: 0;
+      overflow: hidden;
+      line-height: 44px;
+      color: var(--ink);
+      text-decoration: none;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      @media (hover: hover) {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    &__status {
+      flex: none;
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+    }
+
+    &__keys {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
+      padding: 2px 4px 0;
+    }
+
+    &__key {
+      position: relative;
+      isolation: isolate;
+      display: grid;
+      flex: none;
+      place-items: center;
+      width: 48px;
+      height: 44px;
+      padding: 0;
+      border: 0;
+      border-radius: 12px;
+      background: none;
+      color: var(--ink);
+      transition: scale 0.12s ease;
+
+      &.is-main {
+        width: 60px;
+      }
+
+      &:active:not(:disabled) {
+        scale: 0.92;
+      }
+
+      &:disabled {
+        cursor: default;
+        opacity: 0.35;
+      }
+
+      &:focus-visible {
+        outline-offset: 3px;
+      }
+    }
+
+    &__error {
+      margin: 4px 6px 0;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--error-text);
+    }
+  }
+
+  // Tablet and desktop: the boombox drawing standing on the sand, bottom right. The screen
+  // and keys sit on two zones of the drawing (see src/assets/illustrations/boombox.svg).
+  @media (min-width: bp.$boombox) and (min-height: bp.$tall) {
+    .boombox {
+      right: 22px;
+      bottom: 18px;
+      left: auto;
+      display: block;
+      width: var(--boombox-width);
+      aspect-ratio: 320 / 290;
+      padding: 0;
+
+      // Soft shadow on the sand.
+      &::before {
+        position: absolute;
+        right: 1%;
+        bottom: -12px;
+        left: 4%;
+        z-index: -1;
+        height: 30px;
+        border-radius: 50%;
+        background: radial-gradient(closest-side, rgb(25 45 40 / 0.42), transparent);
+        content: '';
+      }
+
+      &__art {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      &__screen {
+        position: absolute;
+        top: 16.6%;
+        right: 7.8%;
+        left: 7.8%;
+        height: 34.5%;
+        padding: 0 10px;
+      }
+
+      &__now {
+        font-size: 1.05rem;
+      }
+
+      &__keys {
+        position: absolute;
+        top: 54.5%;
+        right: 7.6%;
+        left: 7.6%;
+        height: 17.9%;
+        padding: 0 2px;
+      }
+
+      &__key {
+        width: 44px;
+
+        &.is-main {
+          width: 52px;
+        }
+      }
+
+      &__error {
+        position: absolute;
+        right: 0;
+        bottom: 100%;
+        left: 0;
+        margin: 0 0 10px;
+        padding: 6px 10px;
+        border: 2px solid var(--ink);
+        border-radius: 10px;
+        background: var(--paper);
+      }
+    }
+
+    .rough-frame.is-bar {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .boombox {
+      &__key {
+        transition: none;
+      }
+    }
+  }
+}

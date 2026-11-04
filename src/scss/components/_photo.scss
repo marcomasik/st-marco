@@ -1,0 +1,40 @@
+body {
+  // Fixed layer (no background-attachment: fixed, it is broken on iOS). 100lvh keeps it
+  // covering the screen while the iOS toolbars come and go, without resizing.
+  .photo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100lvh;
+    overflow: hidden;
+    container-type: size;
+    background: var(--sky-light);
+    pointer-events: none;
+
+    // Cover-scaled box with the photo's aspect ratio, anchored at 44% so the island
+    // (a little left of the photo's centre) stays in frame in portrait.
+    &__frame {
+      position: absolute;
+      top: 50%;
+      left: 44%;
+      width: max(100cqw, calc(100cqh * 1920 / 1279));
+      aspect-ratio: 1920 / 1279;
+      translate: -44% -50%;
+    }
+
+    &__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &__doodle {
+      position: absolute;
+      height: auto;
+      opacity: 0.95;
+    }
+  }
+}

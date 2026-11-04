@@ -1,0 +1,91 @@
+body {
+  .mix-cover {
+    position: relative;
+    isolation: isolate;
+    display: block;
+    flex: none;
+    aspect-ratio: 1;
+
+    &.is-photo {
+      rotate: -2.5deg;
+    }
+
+    &__img {
+      width: 100%;
+      height: 100%;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+
+    &__record {
+      width: 100%;
+      height: 100%;
+    }
+
+    &__disc {
+      transform-origin: 50% 50%;
+
+      &.is-spinning {
+        animation: record-spin 4.5s linear infinite;
+      }
+    }
+
+    &__groove {
+      fill: none;
+      stroke: color-mix(in srgb, var(--paper) 32%, var(--ink));
+    }
+
+    &__label {
+      stroke: var(--ink);
+      stroke-width: 1.4px;
+
+      &.is-orange {
+        fill: var(--marker-orange);
+      }
+
+      &.is-yellow {
+        fill: var(--marker-yellow);
+      }
+
+      &.is-sea {
+        fill: var(--sea);
+      }
+
+      &.is-sky {
+        fill: var(--sky-light);
+      }
+
+      &.is-palm {
+        fill: var(--palm-light);
+      }
+    }
+
+    &__shine {
+      fill: none;
+      stroke: var(--cloud);
+      stroke-linecap: round;
+      opacity: 0.4;
+    }
+  }
+
+  // Photo covers: the drawn frame goes over the picture's edge.
+  .mix-cover.is-photo .rough-frame {
+    z-index: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mix-cover {
+      &__disc {
+        &.is-spinning {
+          animation: none;
+        }
+      }
+    }
+  }
+
+  @keyframes record-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}

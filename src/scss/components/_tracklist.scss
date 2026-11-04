@@ -1,0 +1,93 @@
+@use '../base/marker';
+
+body {
+  .tracklist {
+    margin-top: 4px;
+
+    &__heading {
+      margin-bottom: 4px;
+      font-size: 1.8rem;
+    }
+
+    &__items {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    &__item {
+      border-top: 2px dashed color-mix(in srgb, var(--ink) 16%, transparent);
+
+      &:first-child {
+        border-top: 0;
+      }
+    }
+
+    // Each row is one big button: easy to hit on a phone.
+    &__button {
+      display: grid;
+      grid-template-columns: 4.3em minmax(0, 1fr);
+      align-items: start;
+      gap: 12px;
+      width: 100%;
+      min-height: 58px;
+      padding: 10px 8px;
+      border: 0;
+      border-radius: 10px;
+      background: none;
+      color: var(--ink);
+      text-align: left;
+
+      @media (hover: hover) {
+        &:hover {
+          background: var(--paper-shade);
+        }
+      }
+
+      &:focus-visible {
+        outline-offset: -3px;
+      }
+    }
+
+    &__time {
+      position: relative;
+      justify-self: start;
+      padding: 1px 4px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.5;
+      color: var(--sky-text);
+
+      &.is-current {
+        color: var(--ink);
+      }
+    }
+
+    &__ring {
+      position: absolute;
+      inset: -3px -5px;
+      display: block;
+      pointer-events: none;
+    }
+
+    &__track {
+      display: grid;
+      min-width: 0;
+    }
+
+    &__artist {
+      font-weight: 800;
+    }
+
+    &__name {
+      width: fit-content;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+
+      &.is-current {
+        background: marker.$swash no-repeat 0 92% / 100% 0.7em;
+      }
+    }
+  }
+}

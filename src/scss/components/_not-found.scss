@@ -1,0 +1,21 @@
+body {
+  .not-found {
+    display: grid;
+    justify-items: start;
+    gap: 10px;
+    padding-bottom: 12px;
+
+    &__title {
+      font-size: 2.4rem;
+    }
+
+    &__link {
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--tap);
+      font-family: var(--font-hand);
+      font-size: 1.3rem;
+      color: var(--sky-text);
+    }
+  }
+}

@@ -1,0 +1,116 @@
+@use '../base/breakpoints' as bp;
+
+body {
+  .panel-header {
+    position: relative;
+    height: clamp(180px, 54vw, 230px);
+    margin: 0 10px;
+
+    &__photo {
+      position: absolute;
+      inset: 0 0 18px;
+      overflow: hidden;
+      border-radius: 14px 18px 4px 6px / 16px 12px 4px 4px;
+      background: var(--sky-light);
+    }
+
+    // Phones: the island crop, palms in view below the wordmark.
+    &__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 78%;
+    }
+
+    &__home {
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      z-index: 2;
+      display: block;
+      width: min(56%, 260px);
+      border-radius: 12px;
+      translate: -50% 0;
+
+      &:focus-visible {
+        outline: 3px solid var(--paper);
+        outline-offset: 2px;
+        box-shadow: 0 0 0 7px var(--sky-text);
+      }
+    }
+
+    &__star {
+      position: absolute;
+      z-index: 1;
+      width: 22px;
+
+      &.is-a {
+        top: 58%;
+        left: 6%;
+      }
+
+      &.is-b {
+        top: 40%;
+        right: 5%;
+        width: 16px;
+      }
+
+      &.is-c {
+        top: 64%;
+        right: 16%;
+        width: 18px;
+      }
+    }
+
+    // Scalloped clouds in paper colour: the photo melts into the panel.
+    &__clouds {
+      position: absolute;
+      right: -2px;
+      bottom: 0;
+      left: -2px;
+      z-index: 1;
+      width: calc(100% + 4px);
+      height: 44px;
+      overflow: hidden;
+    }
+  }
+
+  // Hanging layout: the island is above the panel, so the strip shows only sky.
+  @media (min-width: bp.$tablet) and (min-height: bp.$tall) {
+    .panel-header {
+      height: 214px;
+
+      &__img {
+        object-position: 50% 30%;
+      }
+
+      &__home {
+        top: 50%;
+        width: min(66%, 400px);
+        translate: -50% -62%;
+      }
+
+      &__star {
+        width: 30px;
+
+        &.is-a {
+          top: 16%;
+          left: 6%;
+        }
+
+        &.is-b {
+          top: 52%;
+          right: 7%;
+          left: auto;
+          width: 20px;
+        }
+
+        &.is-c {
+          top: 12%;
+          right: 4%;
+          width: 24px;
+        }
+      }
+    }
+  }
+}

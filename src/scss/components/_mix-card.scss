@@ -1,0 +1,116 @@
+@use '../base/marker';
+
+body {
+  .mix-card {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    // Stable tilt per mix, from MixCard.tsx.
+    rotate: var(--card-tilt, 0deg);
+    transition: translate 0.2s ease;
+
+    @media (hover: hover) {
+      &:hover {
+        translate: 0 -2px;
+      }
+    }
+
+    &__cover {
+      width: 56px;
+    }
+
+    &__body {
+      min-width: 0;
+    }
+
+    &__title {
+      font-size: 1.3rem;
+      line-height: 1.1;
+    }
+
+    // The title link covers the whole card; the play button sits above it.
+    &__link {
+      color: var(--ink);
+      text-decoration: none;
+
+      &::after {
+        position: absolute;
+        inset: -4px;
+        z-index: 1;
+        border-radius: 10px;
+        content: '';
+      }
+
+      &:focus-visible {
+        outline: none;
+      }
+
+      &:focus-visible::after {
+        outline: 3px solid var(--sky-text);
+        outline-offset: 4px;
+      }
+    }
+
+    &__name {
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+
+      &.is-current {
+        background: marker.$swash no-repeat 0 92% / 100% 0.62em;
+      }
+    }
+
+    &__meta {
+      margin-top: 3px;
+      font-size: 0.8125rem;
+      color: var(--ink-soft);
+    }
+
+    &__date,
+    &__length {
+      white-space: nowrap;
+    }
+
+    &__now {
+      margin-top: 2px;
+      font-family: var(--font-hand);
+      font-size: 1.05rem;
+      line-height: 1.2;
+      color: var(--sky-text);
+    }
+  }
+
+  @container panel (min-width: 480px) {
+    .mix-card {
+      grid-template-columns: 84px minmax(0, 1fr) auto;
+      gap: 18px;
+      padding: 14px 18px 14px 14px;
+
+      &__cover {
+        width: 84px;
+      }
+
+      &__title {
+        font-size: 1.7rem;
+      }
+
+      &__meta {
+        font-size: 0.875rem;
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mix-card {
+      transition: none;
+
+      &:hover {
+        translate: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Build output and caches
+dist/
+.vite/
+*.tsbuildinfo
+coverage/
+
+# Env files: secrets (R2 keys) live in .env, never commit it
+.env
+.env.*
+!.env.example
+
+# Audio is never stored in the repo (production audio lives in object storage)
+public/mixes/
+docs/*.mp3
+docs/*.wav
+docs/*.m4a
+
+# Playwright and screenshot output
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+screenshots/
+
+# Lighthouse reports
+lighthouse/
+*.lighthouse.json
+*.lighthouse.html
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Claude Code: personal local settings
+.claude/settings.local.json

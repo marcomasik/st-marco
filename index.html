@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>St. Marco</title>
+    <meta name="description" content="DJ mixes by St. Marco." />
+    <meta name="theme-color" content="#0b6fc4" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/icons/favicon-16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="St. Marco" />
+    <meta name="mobile-web-app-capable" content="yes" />
+  </head>
+  <body>
+    <!-- The background photo is plain HTML, so it paints before the app's JavaScript runs
+         (it is the largest element on screen). React adds the doodles into #photo-frame. -->
+    <div class="photo" aria-hidden="true">
+      <div class="photo__frame" id="photo-frame">
+        <picture>
+          <source
+            type="image/avif"
+            srcset="/img/bg-960.avif 960w, /img/bg-1440.avif 1440w, /img/bg-1920.avif 1920w"
+            sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"
+          />
+          <source
+            type="image/webp"
+            srcset="/img/bg-960.webp 960w, /img/bg-1440.webp 1440w, /img/bg-1920.webp 1920w"
+            sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"
+          />
+          <img
+            class="photo__img"
+            src="/img/bg-1920.jpg"
+            srcset="/img/bg-960.jpg 960w, /img/bg-1440.jpg 1440w, /img/bg-1920.jpg 1920w"
+            sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"
+            width="1920"
+            height="1279"
+            alt=""
+            fetchpriority="high"
+          />
+        </picture>
+      </div>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

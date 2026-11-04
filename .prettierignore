@@ -1,0 +1,9 @@
+dist/
+coverage/
+public/
+docs/
+test-results/
+playwright-report/
+screenshots/
+lighthouse/
+package-lock.json

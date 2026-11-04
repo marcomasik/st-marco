@@ -1,0 +1,65 @@
+body {
+  // Drawn play button: a real <button> with a Rough.js marker outline behind the icon.
+  .play-toggle {
+    position: relative;
+    isolation: isolate;
+    z-index: 2;
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: none;
+    color: var(--ink);
+    transition: scale 0.15s ease;
+
+    &:active {
+      scale: 0.94;
+    }
+
+    &:focus-visible {
+      outline: 3px solid var(--sky-text);
+      outline-offset: 6px;
+    }
+
+    &.has-label {
+      width: auto;
+      height: auto;
+      min-height: 52px;
+      padding: 8px 20px 8px 14px;
+      border-radius: 14px;
+    }
+
+    &__icon {
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+    }
+
+    &__label {
+      font-family: var(--font-hand);
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    // Orange marker circle around the button of the current mix.
+    &__ring {
+      position: absolute;
+      inset: -9px;
+      display: block;
+      pointer-events: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .play-toggle {
+      transition: none;
+    }
+  }
+}
