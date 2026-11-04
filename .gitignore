@@ -13,8 +13,7 @@ coverage/
 .env.*
 !.env.example
 
-# Audio is never stored in the repo
-public/mixes/
+# Audio 
 tests/fixtures/media/*.mp3
 docs/*.mp3
 docs/*.wav
