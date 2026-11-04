@@ -19,7 +19,14 @@ export default defineConfig({
     { name: 'webkit', use: { ...devices['Desktop Safari'] } },
   ],
   webServer: {
-    command: `npm run media:dev && npm run build && npm run preview -- --port ${PORT} --strictPort`,
+    // A separate build with the demo mixes (tests/fixtures), served with its test audio.
+    command: [
+      'npm run media:test',
+      'vite build --mode e2e --outDir dist-e2e --emptyOutDir',
+      'mkdir -p dist-e2e/test-media',
+      'cp tests/fixtures/media/* dist-e2e/test-media/',
+      `vite preview --outDir dist-e2e --port ${PORT} --strictPort`,
+    ].join(' && '),
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,

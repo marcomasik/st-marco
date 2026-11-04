@@ -9,6 +9,7 @@ import tseslint from 'typescript-eslint';
 export default defineConfig([
   globalIgnores([
     'dist',
+    'dist-e2e',
     'coverage',
     'public',
     'test-results',

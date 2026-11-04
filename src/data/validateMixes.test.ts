@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import demoMixes from '../../tests/fixtures/mixes.json';
 import rawMixes from './mixes.json';
 import { findMixDataProblems, MixDataError, parseMixes } from './validateMixes';
 
@@ -21,6 +22,10 @@ function validMix(overrides: Record<string, unknown> = {}) {
 describe('findMixDataProblems', () => {
   it('accepts the real mixes.json', () => {
     expect(findMixDataProblems(rawMixes)).toEqual([]);
+  });
+
+  it('accepts the demo mixes used by the Playwright tests', () => {
+    expect(findMixDataProblems(demoMixes)).toEqual([]);
   });
 
   it('accepts a minimal mix without optional fields', () => {

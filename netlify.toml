@@ -1,0 +1,10 @@
+# Netlify. Redirects and headers live in public/_redirects and public/_headers, so they work
+# for drag-and-drop deploys of dist/ as well as `npm run deploy` (CLI).
+# The audio in public/mixes/ is gitignored, so deploy from this Mac, not from a git build.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"

@@ -2,7 +2,8 @@
 
 Private website for St. Marco's DJ mixes (replaces Mixcloud). Main use: listening on an iPhone,
 also in the background (screen locked, Google Maps open). Audio reliability beats everything.
-Phase 3 (Cloudflare R2 upload script, Pages deploy, Access login) is planned but not built yet.
+Hosting: Netlify (`netlify.toml`), deployed from this Mac with `npm run deploy`; the audio is
+uploaded with the site. Cloudflare R2/Access from the original Phase 3 plan are not built.
 
 ## Stack
 
@@ -20,7 +21,7 @@ Phase 3 (Cloudflare R2 upload script, Pages deploy, Access login) is planned but
 
 ## Commands
 
-- `npm run dev`: dev server. `predev` prepares `public/mixes/test-mix.mp3`.
+- `npm run dev`: dev server with the real mixes (audio from `public/mixes/`).
 - `npm run build`: typecheck, then build. Fails when `src/data/mixes.json` is invalid.
 - `npm run preview`: serves `dist/` on port 4173.
 - `npm run check`: typecheck, lint, Prettier check, unit tests. Run before handing work back.
@@ -29,8 +30,11 @@ Phase 3 (Cloudflare R2 upload script, Pages deploy, Access login) is planned but
 - `npm run screenshots`: Playwright screenshots into `screenshots/` (gitignored).
 - `npm run images`: regenerates `public/img/*` variants and `public/icons/*` from
   `public/img/island.jpg`. Crops are constants at the top of `scripts/make-images.mjs`.
-- `npm run media:dev`: copies `docs/test-mix.mp3` (if present) or generates a 61:30 synthetic
-  test mix with ffmpeg. Its marker times match the placeholder tracklists.
+- `npm run media:test`: generates the 61:30 synthetic test mix for Playwright
+  (`tests/fixtures/media/`, needs ffmpeg). Its marker times match the demo tracklists.
+- `npm run deploy` / `npm run deploy:preview`: build locally and upload to Netlify
+  (production / draft URL). Needs `netlify login` and a linked site. Or drag `dist/` onto
+  the project's Deploys page. Redirects/headers: `public/_redirects`, `public/_headers`.
 
 ## Structure
 
@@ -70,13 +74,18 @@ Phase 3 (Cloudflare R2 upload script, Pages deploy, Access login) is planned but
 
 ## Data
 
-- `src/data/mixes.json` is an array; fields are documented in `src/data/types.ts`.
+- `src/data/mixes.json` holds the real mixes; fields are documented in `src/data/types.ts`.
+- Demo mixes for the tests live in `tests/fixtures/` (`mixes.json`, cover, test MP3). The
+  e2e build (`vite build --mode e2e`, `dist-e2e/`) swaps them in; they never reach `dist/`.
   Validated at load time and in `vite build` (plugin in `vite.config.ts`). Unknown fields,
   duplicate ids/slugs, unsorted or out-of-range tracklists are errors.
 - `id` never changes once published (saved positions use it).
 - `audioUrl` and `cover`: relative keys resolve against `VITE_MEDIA_BASE_URL` (default
-  `/mixes`); absolute URLs and root-relative paths (`/img/...`) pass through.
-- Audio never goes into the repo: `public/mixes/` and `docs/*.mp3` are gitignored.
+  `/mixes`, i.e. `public/mixes/`, which is how Netlify serves them); absolute URLs and
+  root-relative paths (`/img/...`) pass through.
+- Audio never goes into the repo: `public/mixes/` and `tests/fixtures/media/*.mp3` are
+  gitignored. A new mix: drop the file in `public/mixes/`, add an entry, `npm run deploy`.
+- Search engines: `robots.txt` disallows all, plus `noindex` meta and `X-Robots-Tag`.
 
 ## Design rules
 

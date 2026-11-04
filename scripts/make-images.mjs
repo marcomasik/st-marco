@@ -4,7 +4,7 @@
 // public/img/bg-*.{avif,webp,jpg}            full background, 3 widths
 // public/img/header-sky-*.{avif,webp,jpg}    panel header strip on tablet/desktop (sky only)
 // public/img/header-island-*.{avif,webp,jpg} panel header strip on phones (island + sky)
-// public/img/covers/low-tide-disco.jpg       cover for one placeholder mix
+// tests/fixtures/media/low-tide-disco.jpg     cover for one demo mix (tests only)
 // public/icons/*                             round avatar crop: favicons, PWA icons, artwork
 
 import { mkdirSync } from 'node:fs';
@@ -23,7 +23,7 @@ const AVATAR = { cx: 880, cy: 585, r: 310 };
 /** Header strips. */
 const HEADER_SKY = { left: 0, top: 0, width: 1920, height: 440 };
 const HEADER_ISLAND = { left: 420, top: 220, width: 920, height: 511 };
-/** Placeholder cover: shallow water and waves. */
+/** Demo cover for the tests: shallow water and waves. */
 const COVER = { left: 1180, top: 679, width: 600, height: 600 };
 
 const BG_WIDTHS = [960, 1440, 1920];
@@ -31,7 +31,6 @@ const HEADER_SKY_WIDTHS = [960, 1920];
 const HEADER_ISLAND_WIDTHS = [600, 720, 920];
 const ARTWORK_SIZES = [96, 192, 256, 384, 512];
 
-mkdirSync(join(imgDir, 'covers'), { recursive: true });
 mkdirSync(iconDir, { recursive: true });
 
 async function writeVariants(region, widths, name) {
@@ -105,7 +104,7 @@ await sharp(source)
   .extract(COVER)
   .resize(360, 360)
   .jpeg({ quality: 78, mozjpeg: true })
-  .toFile(join(imgDir, 'covers', 'low-tide-disco.jpg'));
+  .toFile(join(root, 'tests', 'fixtures', 'media', 'low-tide-disco.jpg'));
 await writeIcons();
 
 console.log('Images written to public/img and public/icons.');

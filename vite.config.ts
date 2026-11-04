@@ -5,32 +5,25 @@ import type { Plugin } from 'vite';
 import { defineConfig } from 'vitest/config';
 import { findMixDataProblems } from './src/data/validateMixes.ts';
 
-const mixesFile = fileURLToPath(new URL('./src/data/mixes.json', import.meta.url));
+const realMixes = fileURLToPath(new URL('./src/data/mixes.json', import.meta.url));
+/** Demo mixes for the Playwright tests only (`--mode e2e`), never in a real build. */
+const demoMixes = fileURLToPath(new URL('./tests/fixtures/mixes.json', import.meta.url));
 
-/** Fails `vite build` when src/data/mixes.json is broken, so bad data never deploys. */
-function validateMixes(): Plugin {
+/** Fails `vite build` when the mixes data is broken, so bad data never deploys. */
+function validateMixes(file: string): Plugin {
   return {
     name: 'stmarco:validate-mixes',
-    configResolved(config) {
-      if (config.command === 'build' && !config.env.VITE_MEDIA_BASE_URL) {
-        config.logger.warn(
-          'VITE_MEDIA_BASE_URL is not set: audio will load from /mixes (fine locally, wrong in production).',
-        );
-      }
-    },
     buildStart() {
-      this.addWatchFile(mixesFile);
+      this.addWatchFile(file);
       let data: unknown;
       try {
-        data = JSON.parse(readFileSync(mixesFile, 'utf8'));
+        data = JSON.parse(readFileSync(file, 'utf8'));
       } catch (error) {
-        this.error(`src/data/mixes.json is not valid JSON: ${(error as Error).message}`);
+        this.error(`${file} is not valid JSON: ${(error as Error).message}`);
       }
       const problems = findMixDataProblems(data);
       if (problems.length > 0) {
-        this.error(
-          `src/data/mixes.json is invalid:\n${problems.map((p) => `  - ${p}`).join('\n')}`,
-        );
+        this.error(`${file} is invalid:\n${problems.map((p) => `  - ${p}`).join('\n')}`);
       }
     },
   };
@@ -40,12 +33,17 @@ function validateMixes(): Plugin {
 // preview servers, so the site can be tested on a phone over HTTPS.
 const tunnelHosts = ['.trycloudflare.com'];
 
-export default defineConfig({
-  plugins: [react(), validateMixes()],
-  server: { allowedHosts: tunnelHosts },
-  preview: { allowedHosts: tunnelHosts },
-  test: {
-    include: ['src/**/*.test.ts'],
-    environment: 'node',
-  },
+export default defineConfig(({ mode }) => {
+  const e2e = mode === 'e2e';
+  return {
+    plugins: [react(), validateMixes(e2e ? demoMixes : realMixes)],
+    // The e2e build swaps the real mixes for the demo mixes.
+    resolve: e2e ? { alias: [{ find: /^\.\/mixes\.json$/, replacement: demoMixes }] } : {},
+    server: { allowedHosts: tunnelHosts },
+    preview: { allowedHosts: tunnelHosts },
+    test: {
+      include: ['src/**/*.test.ts'],
+      environment: 'node',
+    },
+  };
 });

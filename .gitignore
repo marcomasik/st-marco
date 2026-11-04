@@ -3,6 +3,7 @@ node_modules/
 
 # Build output and caches
 dist/
+dist-e2e/
 .vite/
 *.tsbuildinfo
 coverage/
@@ -12,8 +13,9 @@ coverage/
 .env.*
 !.env.example
 
-# Audio is never stored in the repo (production audio lives in object storage)
+# Audio is never stored in the repo
 public/mixes/
+tests/fixtures/media/*.mp3
 docs/*.mp3
 docs/*.wav
 docs/*.m4a
@@ -24,6 +26,9 @@ playwright-report/
 blob-report/
 playwright/.cache/
 screenshots/
+
+# Netlify CLI link to the site
+.netlify/
 
 # Lighthouse reports
 lighthouse/

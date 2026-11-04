@@ -1,69 +1,10 @@
 [
   {
-    "id": "sm-004",
-    "slug": "low-tide-disco",
-    "title": "Low Tide Disco",
-    "date": "2026-10-18",
-    "durationSeconds": 3690,
-    "audioUrl": "test-mix.mp3",
-    "cover": "/img/covers/low-tide-disco.jpg",
-    "description": "Recorded on a slow Sunday afternoon. Warm disco edits, a little dub, and one very long breakdown for the walk back from the beach.",
-    "tracklist": [
-      { "time": 0, "artist": "Coral Static", "title": "Night Swim" },
-      { "time": 300, "artist": "Mango Hi-Fi", "title": "Salt in the Speakers" },
-      { "time": 690, "artist": "The Driftwood Club", "title": "Tide Tables" },
-      { "time": 1080, "artist": "Lula Reef", "title": "Lagoon Telephone" },
-      { "time": 1485, "artist": "Palmetto Brass", "title": "Frigate Bird" },
-      { "time": 2300, "artist": "Sandbar Sound System", "title": "Low Tide Dub" },
-      { "time": 2700, "artist": "Kite Season", "title": "Offshore Breeze" },
-      { "time": 3150, "artist": "Moonwake", "title": "Conch Shell Groove" }
-    ]
-  },
-  {
-    "id": "sm-003",
-    "slug": "frigate-birds-at-dawn",
-    "title": "Frigate Birds at Dawn",
-    "date": "2026-08-30",
-    "durationSeconds": 3690,
-    "audioUrl": "test-mix.mp3",
-    "description": "An early morning set: deep, patient and mostly instrumental. Best with headphones and the first coffee.",
-    "tracklist": [
-      { "time": 0, "artist": "Bajo Azul", "title": "Sea Glass" },
-      { "time": 690, "artist": "Hammock Theory", "title": "Slow Coconut" },
-      { "time": 1485, "artist": "Pelican Choir", "title": "First Light" },
-      { "time": 1860, "artist": "Aloe & Ash", "title": "Morning Haze" },
-      { "time": 2700, "artist": "Sunken Piano", "title": "Seven Fathoms" },
-      { "time": 3480, "artist": "Coral Static", "title": "Night Swim (Reprise)" }
-    ]
-  },
-  {
-    "id": "sm-002",
-    "slug": "sandbar-sunset-session",
-    "title": "Sandbar Sunset Session",
-    "date": "2026-06-21",
-    "durationSeconds": 3690,
-    "audioUrl": "test-mix.mp3",
-    "description": "The longest day of the year, played live from the terrace until the light was gone.",
-    "tracklist": [
-      { "time": 0, "artist": "Lula Reef", "title": "Golden Hour" },
-      { "time": 300, "artist": "The Driftwood Club", "title": "Barefoot Boogie" },
-      { "time": 690, "artist": "Mango Hi-Fi", "title": "Papaya Funk" },
-      { "time": 1080, "artist": "Kite Season", "title": "Trade Winds" },
-      { "time": 1485, "artist": "Moonwake", "title": "Shell Collector" },
-      { "time": 1860, "artist": "Palmetto Brass", "title": "Rum Punch" },
-      { "time": 2300, "artist": "Sandbar Sound System", "title": "Horizon Line" },
-      { "time": 2700, "artist": "Hammock Theory", "title": "Last Ferry" },
-      { "time": 3150, "artist": "Bajo Azul", "title": "Blue Hour" },
-      { "time": 3480, "artist": "Sunken Piano", "title": "Lights on the Water" }
-    ]
-  },
-  {
     "id": "sm-001",
-    "slug": "coconut-radio-vol-1",
-    "title": "Coconut Radio Vol. 1",
-    "date": "2026-03-07",
-    "durationSeconds": 3690,
-    "audioUrl": "test-mix.mp3",
-    "description": "The very first one. No tracklist, just a warm night and a crate of old records."
+    "slug": "new-mix-1",
+    "title": "New Mix 1",
+    "date": "2026-08-09",
+    "durationSeconds": 3366,
+    "audioUrl": "New_Mix_1.m4a"
   }
 ]

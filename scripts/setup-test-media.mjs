@@ -1,33 +1,19 @@
-// Prepares local test audio for `npm run dev` and the Playwright tests. Safe to run often.
-//
-// 1. public/mixes/test-mix.mp3 already exists: nothing to do.
-// 2. docs/test-mix.mp3 exists: copy it (use this for a real mix).
-// 3. ffmpeg is installed: generate a synthetic 61:30 test mix. A beat with a different pitch
-//    starts at every marker, and on macOS a voice reads the marker time, so you can hear
-//    the tracklist highlight switch.
-// 4. Otherwise: print a hint. The app still runs, only the audio cannot load.
-//
-// public/mixes/ and docs/*.mp3 are gitignored: audio never goes into the repo.
+// Prepares the synthetic test mix for the Playwright tests (tests/fixtures/media/test-mix.mp3).
+// Safe to run often: does nothing when the file exists. Needs ffmpeg. A beat with a different
+// pitch starts at every marker, and on macOS a voice reads the marker time, so you can hear
+// the tracklist highlight switch. The demo mixes in tests/fixtures/mixes.json use these
+// markers. The MP3 is gitignored and never part of a real build.
 
 import { spawnSync } from 'node:child_process';
-import {
-  copyFileSync,
-  existsSync,
-  mkdirSync,
-  mkdtempSync,
-  renameSync,
-  rmSync,
-  writeFileSync,
-} from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const target = join(root, 'public', 'mixes', 'test-mix.mp3');
-const realMix = join(root, 'docs', 'test-mix.mp3');
+const target = join(root, 'tests', 'fixtures', 'media', 'test-mix.mp3');
 
-// Marker start times in seconds. The placeholder tracklists in src/data/mixes.json use them.
+// Marker start times in seconds. The demo tracklists in tests/fixtures/mixes.json use them.
 const MARKERS = [0, 300, 690, 1080, 1485, 1860, 2300, 2700, 3150, 3480];
 const TOTAL_SECONDS = 3690;
 const PITCHES = [220, 247, 262, 294, 330, 349, 392, 440, 494, 523];
@@ -134,19 +120,11 @@ if (existsSync(target)) {
   process.exit(0);
 }
 
-mkdirSync(dirname(target), { recursive: true });
-
-if (existsSync(realMix)) {
-  copyFileSync(realMix, target);
-  console.log('Copied docs/test-mix.mp3 to public/mixes/test-mix.mp3');
-} else if (has('ffmpeg')) {
-  console.log(
-    'Generating a 61:30 synthetic test mix in public/mixes/ (one time, takes a moment)...',
-  );
+if (has('ffmpeg')) {
+  console.log('Generating the 61:30 synthetic test mix (one time, takes a moment)...');
   generate();
-  console.log('Done: public/mixes/test-mix.mp3');
+  console.log('Done: tests/fixtures/media/test-mix.mp3');
 } else {
-  console.warn(
-    'No test audio: put an MP3 at docs/test-mix.mp3 (or install ffmpeg) and run `npm run media:dev`.',
-  );
+  console.error('ffmpeg is needed to generate the test mix for the Playwright tests.');
+  process.exit(1);
 }
