@@ -1,5 +1,21 @@
 [
   {
+    "id": "sm-003",
+    "slug": "new-mix-3",
+    "title": "New Mix 3",
+    "date": "2026-10-29",
+    "durationSeconds": 3499,
+    "audioUrl": "New_Mix_3.m4a"
+  },
+  {
+    "id": "sm-002",
+    "slug": "new-mix-2",
+    "title": "New Mix 2",
+    "date": "2026-10-03",
+    "durationSeconds": 3414,
+    "audioUrl": "New_Mix_2.m4a"
+  },
+  {
     "id": "sm-001",
     "slug": "new-mix-1",
     "title": "New Mix 1",
